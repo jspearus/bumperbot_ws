@@ -194,7 +194,7 @@
   </joint>
 
 
-  <joint name="can_joint" type="fixed">
+  <!-- <joint name="can_joint" type="fixed">
     <origin xyz="0 0 0" rpy="0 0 0" />
     <parent link="base_link" />
     <child link="can_link" />
@@ -224,6 +224,6 @@
         <mesh filename="package://bumperbot_description/meshes/can.STL" />
       </geometry>
     </collision>
-  </link>
+  </link> -->
 
 </robot>
