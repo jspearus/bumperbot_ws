@@ -6,7 +6,7 @@ joy_teleop:
       interface_type: geometry_msgs/msg/TwistStamped
       topic_name: bumperbot_controller/cmd_vel
       deadman_buttons: [5]
-      autorepeat_rate: 50.0
+      autorepeat_rate: 100.0
       coalesce_interval_ms: 0
       axis_mappings:
         twist-linear-x:
