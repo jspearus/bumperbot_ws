@@ -141,29 +141,36 @@ hardware_interface::return_type BumperbotInterface::read(const rclcpp::Time &,
   // Interpret the string
   if(arduino_.IsDataAvailable())
   {
-    auto dt = (rclcpp::Clock().now() - last_run_).seconds();
-    std::string message;
-    arduino_.ReadLine(message);
-    std::stringstream ss(message);
-    std::string res;
-    int multiplier = 1;
-    while(std::getline(ss, res, ','))
-    {
-      multiplier = res.at(1) == 'p' ? 1 : -1;
+     auto now = rclcpp::Clock().now();
+    auto dt = (now - last_run_).seconds();
 
-      if(res.at(0) == 'r')
+    if (arduino_.IsDataAvailable())
+    {
+      std::string message;
+      arduino_.ReadLine(message);
+
+      std::stringstream ss(message);
+      std::string res;
+
+      while (std::getline(ss, res, ','))
       {
-        velocity_states_.at(0) = -multiplier * std::stod(res.substr(2, res.size()));
-        position_states_.at(0) += velocity_states_.at(0) * dt;
-      }
-      else if(res.at(0) == 'l')
-      {
-        velocity_states_.at(1) = -multiplier * std::stod(res.substr(2, res.size()));
-        position_states_.at(1) += velocity_states_.at(1) * dt;
+        int multiplier = res.at(1) == 'p' ? 1 : -1;
+
+        if (res.at(0) == 'r')
+        {
+          velocity_states_[0] = multiplier * std::stod(res.substr(2));
+          position_states_[0] += velocity_states_[0] * dt;
+        }
+        else if (res.at(0) == 'l')
+        {
+          velocity_states_[1] = multiplier * std::stod(res.substr(2));
+          position_states_[1] += velocity_states_[1] * dt;
+        }
       }
     }
-    last_run_ = rclcpp::Clock().now();
-  }
+
+    last_run_ = now;
+    }
   return hardware_interface::return_type::OK;
 }
 
