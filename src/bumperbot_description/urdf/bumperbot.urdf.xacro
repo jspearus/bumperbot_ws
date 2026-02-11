@@ -193,4 +193,37 @@
     <axis xyz="0 0 0" />
   </joint>
 
+
+  <joint name="can_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="can_link" />
+    <axis xyz="0 0 0" />
+  </joint>
+  
+  <link name="can_link">
+    <inertial>
+      <origin xyz="3.8996812895542E-07 2.40073004698083E-07 0.00219173397061509" rpy="0 0 0" />
+      <mass value="1.44379265037902E-06" />
+      <inertia ixx="7.23075276010246E-11" ixy="-6.10956872363424E-16" ixz="2.22849693527207E-15"
+               iyy="3.87137930859167E-11" iyz="2.939098587861E-15"
+               izz="1.00967486676306E-10" />
+    </inertial>
+    <visual>
+      <origin xyz="-0.03 0.025 0.078" rpy="1.57 0 0" />
+      <geometry>
+        <mesh filename="package://bumperbot_description/meshes/can.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://bumperbot_description/meshes/can.STL" />
+      </geometry>
+    </collision>
+  </link>
+
 </robot>
