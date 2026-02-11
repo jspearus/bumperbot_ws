@@ -24,6 +24,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
+            'trajectory_plotter = bumperbot_utils.trajectory_plotter:main',
         ],
     },
 )
