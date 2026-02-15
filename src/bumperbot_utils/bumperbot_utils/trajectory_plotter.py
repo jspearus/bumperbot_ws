@@ -15,13 +15,13 @@ class TrajectoryPLotter(Node):
         self.trajectory_pub_ = self.create_publisher(Path, "bumperbot_controller/trajectory", 10)
         self.trajectory_ = Path()
         
-    def odometryCallback(self, msg: Odometry):
+    def odometryCallback(self, msg):
         self.trajectory_.header.frame_id = msg.header.frame_id
-        curr_pose = PoseStamped()
-        curr_pose.header.frame_id = msg.header.frame_id
-        curr_pose.header.stamp = msg.header.stamp
-        curr_pose.pose = msg.pose.pose
-        self.trajectory_.poses.append(curr_pose)
+        cur_pose = PoseStamped()
+        cur_pose.header.frame_id = msg.header.frame_id
+        cur_pose.header.stamp = msg.header.stamp
+        cur_pose.pose = msg.pose.pose
+        self.trajectory_.poses.append(cur_pose)
         
         self.trajectory_pub_.publish(self.trajectory_)
 
